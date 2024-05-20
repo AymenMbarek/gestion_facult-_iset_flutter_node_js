@@ -184,6 +184,39 @@ app.post('/events', async (req, res) => {
   }
 });
 
+app.get('/grades', (req, res) => {
+    let query = 'SELECT * FROM grades';
+    const { student_id, course_id, semester } = req.query;
+
+    let conditions = [];
+    if (student_id) conditions.push(`student_id = ${mysql.escape(student_id)}`);
+    if (course_id) conditions.push(`course_id = ${mysql.escape(course_id)}`);
+    if (semester) conditions.push(`semester = ${mysql.escape(semester)}`);
+
+    if (conditions.length > 0) {
+        query += ' WHERE ' + conditions.join(' AND ');
+    }
+
+    db.query(query, (err, results) => {
+        if (err) return res.status(500).json({ error: 'Internal Server Error', details: err });
+        res.json(results);
+    });
+});
+
+app.post('/grades', async (req, res) => {
+    const { student_id, course_id, grade, semester } = req.body;
+    const query = 'INSERT INTO grades (student_id, course_id, grade, semester) VALUES (?, ?, ?, ?)';
+    
+    db.query(query, [student_id, course_id, grade, semester], (error, results) => {
+        if (error) {
+            console.error('Error adding grade:', error);
+            return res.status(500).json({ error: 'Internal Server Error', details: error });
+        }
+        res.status(201).json({ message: 'Grade added successfully', gradeId: results.insertId });
+    });
+});
+
+
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
 });

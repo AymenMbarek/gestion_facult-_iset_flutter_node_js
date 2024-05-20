@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:isettozeur/InfoPage.dart';
-import 'package:url_launcher/url_launcher.dart';
+
 import '4CPage.dart';
 import 'BiblioPage.dart';
 import 'CoursPage.dart';
@@ -185,7 +185,7 @@ class AccPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Hafsi HAYTHEM',
+                            'Maryem ',
                             style: TextStyle(
                               fontSize: 20.0,
                               fontWeight: FontWeight.bold,
@@ -241,7 +241,7 @@ class AccPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Hafsi HAYTHEM',
+                            'Maryem',
                             style: TextStyle(
                               fontSize: 20.0,
                               fontWeight: FontWeight.bold,
